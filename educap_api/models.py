@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
-    isActive = models.BooleanField(default=True)
+class Usuario(User):
 
     class Meta:
         db_table = 'usuario'

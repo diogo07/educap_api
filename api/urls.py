@@ -9,5 +9,6 @@ urlpatterns = [
     path("aluno/", include('api.modules.aluno.urls'), name="aluno"),
     path("questao/", include('api.modules.questao.urls'), name="questao"),
     path("resposta/", include('api.modules.resposta.urls'), name="resposta"),
+    path("usuario/", include('api.modules.usuario.urls'), name="usuario"),
 
 ]
