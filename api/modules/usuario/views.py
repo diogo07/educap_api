@@ -29,11 +29,5 @@ class UsuarioUsernameValid(AllowListAPIView):
 
     def get_queryset(self):
         username = self.kwargs['username']
-        queryset = User.objects.filter(username__icontains=username)
-        return queryset
-        # if queryset.__len__() > 0:
-        #     # return {'login_available': 'false'}
-        #     return 0
-        # else:
-        #     # return {'login_available': 'true'}
-        #     return 1
+        queryset = User.objects.filter(username=username)
+        return queryset       
