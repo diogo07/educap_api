@@ -29,3 +29,7 @@ class AlunoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aluno
         fields = '__all__'
+
+class AlunoCountByUniversidadeAndAnoSerializer(serializers.Serializer):
+   enade_ano = serializers.IntegerField()
+   total = serializers.IntegerField()

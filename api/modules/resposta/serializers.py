@@ -29,3 +29,8 @@ class RespostaUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resposta
         fields = '__all__'
+
+class RespostaFilterByUniversidadeSerializer(serializers.Serializer):
+   codigo_questao = serializers.CharField()
+   opcao = serializers.CharField()
+   total = serializers.IntegerField()
