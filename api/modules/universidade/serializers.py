@@ -29,3 +29,9 @@ class UniversidadeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Universidade
         fields = '__all__'
+
+class UniversidadeFilterCursosSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    turno = serializers.CharField()
+    codigo_modalidade = serializers.IntegerField()
+    codigo_grupo = serializers.IntegerField()

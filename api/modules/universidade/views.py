@@ -1,6 +1,6 @@
 from api.modules.universidade.serializers import *
 from api.modules.basicApiView import *
-from educap_api.models import Universidade
+from educap_api.models import Universidade, Curso
 
 
 class UniversidadeListView(IsAutenticatedListApiView):
@@ -32,3 +32,11 @@ class UniversidadeFilterByName(IsAutenticatedListApiView):
             return queryset[:30]
         else:
             return queryset
+
+class UniversidadeFilterCursos(IsAutenticatedListApiView):
+    serializer_class = UniversidadeFilterCursosSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['id_universidade']
+        queryset = Curso.objects.filter(id_universidade=id).values('id', 'turno', 'codigo_modalidade', 'codigo_grupo')
+        return queryset

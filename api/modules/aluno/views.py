@@ -32,3 +32,27 @@ class AlunoFilterByUniversidade(IsAutenticatedListApiView):
 
 
         return queryset
+
+class AlunoFilterByUniversidadeAndCurso(IsAutenticatedListApiView):
+    serializer_class = AlunoCountByUniversidadeAndAnoSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['id_universidade']
+        grupo = self.kwargs['grupo_id']
+        queryset = Aluno.objects.filter(id_curso__id_universidade=id, id_curso__codigo_grupo=grupo).values('enade_ano').annotate(
+                total=Count('enade_ano')).order_by('enade_ano')
+
+
+        return queryset
+
+class AlunoFilterByUniversidadeAndAno(IsAutenticatedListApiView):
+    serializer_class = AlunoCountByUniversidadeAndAnoSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['id_universidade']
+        ano = self.kwargs['ano']
+        queryset = Aluno.objects.filter(id_curso__id_universidade=id, enade_ano=ano).values('enade_ano').annotate(
+                total=Count('enade_ano')).order_by('enade_ano')
+
+
+        return queryset

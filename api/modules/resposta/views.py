@@ -33,3 +33,15 @@ class RespostaFilterByUniversidadeEAno(IsAutenticatedListApiView):
                 total=Count('opcao'))
 
         return queryset
+
+class RespostaFilterByUniversidadeCursoEAno(IsAutenticatedListApiView):
+    serializer_class = RespostaFilterByUniversidadeSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['id_universidade']
+        ano = self.kwargs['ano']
+        codigo_grupo = self.kwargs['codigo_grupo']
+        queryset = Resposta.objects.filter(id_aluno__id_curso__id_universidade=id, id_aluno__id_curso__codigo_grupo=codigo_grupo, id_aluno__enade_ano=ano).values('codigo_questao', 'opcao').annotate(
+                total=Count('opcao'))
+
+        return queryset
