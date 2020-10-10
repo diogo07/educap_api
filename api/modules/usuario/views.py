@@ -4,7 +4,7 @@ from educap_api.models import Usuario
 from django.contrib.auth.models import User
 
 
-class UsuarioListView(AllowListAPIView):
+class UsuarioListView(IsAutenticatedUpdateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioListSerializer
 
@@ -14,12 +14,12 @@ class UsuarioCreateView(AllowCreateAPIView):
 
 
 
-class UsuarioUpdateView(AllowUpdateAPIView):
+class UsuarioUpdateView(IsAutenticatedUpdateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioUpdateSerializer
 
 
-class UsuarioGetView(AllowGetAPIView):
+class UsuarioGetView(IsAutenticatedUpdateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioGetSerializer
 
