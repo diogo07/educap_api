@@ -9,5 +9,6 @@ urlpatterns = [
     path("universidade/<int:id_universidade>/curso/<int:codigo_grupo>/ano/<int:ano>", RespostaFilterByUniversidadeCursoEAno.as_view(), name="resposta_by_universidade_and_curso"),
     path("universidade/<int:id_universidade>/ano/<int:ano>/questao/<str:questao>", RespostaFilterByUniversidadeAnoEQuestao.as_view(), name="resposta_by_universidade_ano_e_questao"),
     path("universidade/<int:id_universidade>/curso/<int:codigo_grupo>/ano/<int:ano>/questao/<str:questao>", RespostaFilterByUniversidadeCursoAnoEQuestao.as_view(), name="resposta_by_universidade_curso_ano_e_questao"),
+    path("universidade/<int:id_universidade>/percepcaodaprova", RespostaFilterByUniversidadeEPercepcaoProva.as_view(), name="resposta_by_universidade_e_percepecao_prova"),
 
 ]

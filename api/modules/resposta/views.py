@@ -97,3 +97,27 @@ class RespostaFilterByUniversidadeCursoAnoEQuestao(IsAutenticatedListApiView):
                 'total': q[2]
             })
         return queryset
+
+class RespostaFilterByUniversidadeEPercepcaoProva(IsAutenticatedListApiView):
+    serializer_class = RespostaFilterByUniversidadeEPercepcaoProvaSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['id_universidade']
+        cursor = connection.cursor()
+        cursor.execute(
+            "select al.enade_ano, r.opcao as opcao, count(r.opcao) as total from resposta as r" +
+            " inner join aluno as al on al.id = r.id_aluno" +
+            " inner join curso as cr on cr.id = al.id_curso" +
+            " inner join universidade as u on u.id = cr.id_universidade" +
+            " inner join questao as q on q.codigo = r.codigo_questao" +
+            " where r.codigo_questao in ('QE_I28', 'QE_I29', 'QE_I30', 'QE_I31', 'QE_I32', 'QE_I33', 'QE_I34', 'QE_I35', 'QE_I36', 'QE_I37', 'QE_I38', 'QE_I39', 'QE_I40', 'QE_I41', 'QE_I42', 'QE_I43', 'QE_I44', 'QE_I45', 'QE_I46', 'QE_I47', 'QE_I48', 'QE_I49', 'QE_I50', 'QE_I51', 'QE_I52', 'QE_I53', 'QE_I54', 'QE_I55', 'QE_I56', 'QE_I57', 'QE_I58', 'QE_I59', 'QE_I60', 'QE_I61', 'QE_I62', 'QE_I63', 'QE_I64', 'QE_I65', 'QE_I66', 'QE_I67', 'QE_I68') and u.id = " + str(id) +
+            " group by (al.enade_ano, r.opcao) order by al.enade_ano, r.opcao")
+        queryset = []
+
+        for q in cursor.fetchall():
+            queryset.append({
+                'ano': q[0],
+                'opcao': q[1],
+                'total': q[2]
+            })
+        return queryset

@@ -34,3 +34,9 @@ class RespostaFilterByUniversidadeSerializer(serializers.Serializer):
    codigo_questao = serializers.CharField()
    opcao = serializers.CharField()
    total = serializers.IntegerField()
+
+
+class RespostaFilterByUniversidadeEPercepcaoProvaSerializer(serializers.Serializer):
+    ano = serializers.IntegerField()
+    opcao = serializers.CharField()
+    total = serializers.IntegerField()

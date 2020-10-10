@@ -40,3 +40,4 @@ class UniversidadeFilterCursos(IsAutenticatedListApiView):
         id = self.kwargs['id_universidade']
         queryset = Curso.objects.filter(id_universidade=id).values('id', 'turno', 'codigo_modalidade', 'codigo_grupo')
         return queryset
+    
